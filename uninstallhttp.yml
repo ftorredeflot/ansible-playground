@@ -1,0 +1,27 @@
+---
+- hosts: grupo1
+  become: yes
+  tasks:
+
+   - name: stop apache
+     service:
+        name: "{{ item }}"
+        enabled: false
+        state: stopped
+     with_items:
+       - httpd
+   - name: desinstalar apache
+     yum:
+         name: httpd
+         state: removed
+
+   - name: instalar samba
+     yum: name=samba state=removed
+
+   - name: abriendo firewall
+     firewalld:
+        service: http
+        permanent: true
+        immediate: true
+        state: disabled
+...

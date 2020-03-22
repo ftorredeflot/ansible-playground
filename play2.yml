@@ -1,0 +1,13 @@
+---
+- hosts: nodos
+  become: yes
+  tasks:
+       - name: actualitzar
+         yum:
+            name: '*'
+            state: latest
+       - name: reboot
+         reboot:
+            pre_reboot_delay: 25
+            post_reboot_delay: 15
+...

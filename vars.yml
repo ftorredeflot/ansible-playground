@@ -1,0 +1,5 @@
+---
+db_pkg: mariadb-server
+db_mon: mytop
+db_srv: mariadb
+...

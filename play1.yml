@@ -1,0 +1,10 @@
+---
+- hosts: nodos
+  tasks:
+       - name: hacer echo
+         shell:
+            cmd: echo {{ item }}
+         with_items:
+           - casa
+           - escaleras
+...

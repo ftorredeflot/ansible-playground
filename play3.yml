@@ -1,0 +1,21 @@
+---
+- hosts: grupo1
+  become: yes
+  vars_files:
+    - vars.yml
+  tasks:
+   - name: instalar {{db_pkg}}
+     yum:
+      name: "{{db_pkg}}"
+      state: latest
+   - name: instalar {{db_mon}}
+     yum:
+      name: "{{db_mon}}"
+      state: latest
+   - name: iniciar servicios
+     service:
+      name: "{{db_srv}}"
+      state: started
+      enabled: true
+
+...

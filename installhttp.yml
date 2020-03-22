@@ -1,0 +1,38 @@
+---
+- hosts: grupo1
+  become: yes
+  tasks:
+
+   - name: instalar apache
+     yum:
+         name: httpd
+         state: latest
+
+   - name: instalar samba
+     yum: name=samba state=removed
+
+   - name: start apache
+     service:
+        name: "{{ item }}"
+        enabled: true
+        state: started
+     with_items:
+      - httpd
+   #   - smb
+   - name: abriendo firewall
+     firewalld:
+        service: http
+        permanent: true
+        immediate: true
+        state: enabled
+   - name: copiando contenido
+     copy:
+        content: '<h1 style="color: green">Mi Pagina web con <b>ANSIBLE</b> </h1>'
+        dest: /var/www/html/index.html
+        mode: 0644
+#   - name: lineincopy
+#     lineinfile:
+#       path: /var/www/html/index.html
+#       regexp: 'Mi'
+#       line: 'Nuestra'
+...
