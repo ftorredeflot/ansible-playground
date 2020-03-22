@@ -1,0 +1,28 @@
+---
+- hosts: nodos
+  become: yes
+  vars:
+     pkg: httpd
+     srv: http
+  tasks:
+    - name: instalar {{ pkg }}
+      yum:
+        name: "{{ pkg }}"
+        state: latest
+    - name: copiando contenido
+      copy:
+        content: " El hostame es: <b> {{ ansible_hostname }} </b><br/>  I la ip es: <b> {{ ansible_default_ipv4.address }} </b>"
+        dest: /var/www/html/index.html
+        mode: 0644
+    - name: start {{ pkg }}
+      service:
+        name: "{{ pkg }}"
+        enabled: true
+        state: started
+    - name: firewall {{ srv }}
+      firewalld:
+        service: "{{ srv }}"
+        permanent: true
+        immediate: true
+        state: enabled
+...
