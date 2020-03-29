@@ -1,0 +1,14 @@
+---
+- hosts: nodos
+  become: yes
+  tasks:
+    - name: crear directorio
+      file:
+          path: /etc/ansible/facts.d
+          state: directory
+          recurse: true
+    - name: copiar facts
+      copy:
+          src: new.fact
+          dest: /etc/ansible/facts.d
+...
