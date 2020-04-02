@@ -1,0 +1,13 @@
+---
+- name: instalar {{ paquete }}
+  yum:
+    name: "{{ paquete  }}"
+    state: latest
+- name: echo
+  shell:
+    cmd: echo {{ item }}
+  with_items:
+     - casa
+     - escaleras
+
+...

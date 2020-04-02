@@ -1,0 +1,9 @@
+---
+- hosts: nodos
+  become: yes
+  tasks:
+     - name: incluir play
+       include_tasks:  playinclusiones1.yml
+       vars:
+          paquete: sl
+...
