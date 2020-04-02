@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+     - name: instalar mediate facts {{ ansible_local.new.pkg.db_pkg}}
+       yum:
+               name: "{{ ansible_local.new.pkg.db_pkg}}"
+               state: latest
+...
