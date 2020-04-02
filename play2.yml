@@ -1,5 +1,5 @@
 ---
-- hosts: nodos
+- hosts: all 
   become: yes
   tasks:
        - name: actualitzar
