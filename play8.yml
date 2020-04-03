@@ -1,0 +1,12 @@
+---
+- hosts: grupo1
+  become: yes
+  tasks:
+     - name: crear usuarios
+       user:
+          name: "{{ item.name }}"
+          state: present
+          groups: "{{ item.groups }}"
+       with_items:
+            - {name: 'rob', groups: 'wheel' }
+            - {name: 'susane', groups: 'root' }
