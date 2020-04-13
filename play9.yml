@@ -1,12 +1,14 @@
 ---
-- hosts: nodos
+- hosts: grupo2
   become: yes
   tasks:
       - name: instalar mariadb
         yum:
-         name: mariadb-server
-         state: latest
-        when: inventory_hostname in groups['grupo1']
+          name: mariadb-server
+          state: latest
+        with_items: 
+            - "{{ ansible_mounts }}"
+        when: item.mount =="/" and item.size_available > 37228728320
 
 
 ...
