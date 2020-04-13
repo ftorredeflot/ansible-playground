@@ -1,0 +1,12 @@
+---
+- hosts: nodos
+  become: yes
+  tasks:
+      - name: instalar mariadb
+        yum:
+         name: mariadb-server
+         state: latest
+        when: inventory_hostname in groups['grupo1']
+
+
+...
